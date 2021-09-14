@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { XAxis, YAxis, Tooltip, LineChart, Line, Legend, Label, LabelList } from 'recharts'
 import './App.css';
-import dotenv from 'dotenv'
+
 
 var axios = require("axios").default;
 
