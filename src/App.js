@@ -87,7 +87,7 @@ function App() {
           'x-rapidapi-key': process.env.REACT_APP_API_KEY
         }
       };
-      // console.log(process.env.REACT_APP_API_KEY)
+      console.log(process.env.REACT_APP_API_KEY)
       const response  = await axios.request(options) 
 
       console.log("response.data: ", response.data)
