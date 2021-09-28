@@ -66,8 +66,15 @@ function App() {
   const [currentInputTicker, setCurrentInputTicker] = useState('')
   const [allTickers, setAllTickers] = useState([]);
   const [companyData, setCompanyData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const clearPortfolio = () => {
+    setAllTickers([]);
+    setCompanyData([]);
+  }
   
   async function getData(tickers) {
+    setIsLoading(true);
     if (tickers.length > 4) {
       alert('Too many inputs. Choose up to 4 stocks')
       return
@@ -87,7 +94,7 @@ function App() {
           'x-rapidapi-key': process.env.REACT_APP_API_KEY
         }
       };
-      console.log(process.env.REACT_APP_API_KEY)
+
       const response  = await axios.request(options) 
 
       console.log("response.data: ", response.data)
@@ -100,6 +107,7 @@ function App() {
     }
     series.push(getPortfolioReturn(series))
     setCompanyData(series);
+    setIsLoading(false);
     console.log("series at end of getData: ", series);
     return series
   }
@@ -125,6 +133,7 @@ function App() {
           <button id="enter" className='button' type='submit'onClick={() => updateTickers(currentInputTicker)}>Add to Portfolio</button>  
           {/* <button id="get-returns" type="submit" onClick={()=> setCompanyData(series)}> Get Portfolio Performance </button> */}
           <button id="get-returns" type="submit" onClick={()=> getData(allTickers)}> Get Portfolio Performance </button>
+          <button id="clear-port" onClick={()=> clearPortfolio()}> Clear Portfolio </button>
         </label>         
       </div>
       <div className="tickers-container">
@@ -134,6 +143,7 @@ function App() {
       </div>
 
       <div className="chart-container">
+          {isLoading && <h2> Loading... </h2>}
           {companyData.length !== 0 && <Chart chart_data={companyData} />}
       </div>
     </div>

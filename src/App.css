@@ -4,13 +4,13 @@ h2 {
 
 .user-input {
   display: grid;
-  grid-template-columns: repeat(4 1fr);
+  grid-template-columns: repeat(5 1fr);
   margin: 2% 20% 2% 20%;
 }
 
 .label {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(5,1fr);
   text-align: right;
   
 }
